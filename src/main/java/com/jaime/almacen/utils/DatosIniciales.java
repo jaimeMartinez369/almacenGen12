@@ -3,12 +3,12 @@ package com.jaime.almacen.utils;
 import com.jaime.almacen.entities.Producto;
 import com.jaime.almacen.entities.Sucursal;
 import com.jaime.almacen.enums.Categoria;
-import com.jaime.almacen.repositories.SucursalRepository;
+import com.jaime.almacen.repositories.sucursales.SucursalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.jaime.almacen.repositories.ProductoRepository;
+import com.jaime.almacen.repositories.producto.ProductoRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
