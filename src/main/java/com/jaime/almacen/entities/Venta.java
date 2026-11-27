@@ -47,6 +47,7 @@ public class Venta {
 
         if (detalleVenta == null)
             throw new DatoInvalidoException("El detalle de la venta es requerido");
+        detalleVenta.asignarVenta(this);
 
         this.detalleVentas.add(detalleVenta);
     }

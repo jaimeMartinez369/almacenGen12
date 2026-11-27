@@ -6,7 +6,7 @@ import com.jaime.almacen.entities.Sucursal;
 import com.jaime.almacen.exceptions.ConflictoException;
 import com.jaime.almacen.exceptions.RecursoNoEncontradoException;
 import com.jaime.almacen.mappers.SucursalMapper;
-import com.jaime.almacen.repositories.SucursalRepository;
+import com.jaime.almacen.repositories.sucursales.SucursalRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

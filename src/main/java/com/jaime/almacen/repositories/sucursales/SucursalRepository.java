@@ -1,4 +1,4 @@
-package com.jaime.almacen.repositories;
+package com.jaime.almacen.repositories.sucursales;
 
 import com.jaime.almacen.entities.Sucursal;
 import org.springframework.data.jpa.repository.JpaRepository;

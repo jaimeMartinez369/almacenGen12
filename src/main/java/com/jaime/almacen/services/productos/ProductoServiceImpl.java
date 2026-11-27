@@ -6,7 +6,7 @@ import com.jaime.almacen.entities.Producto;
 import com.jaime.almacen.enums.Categoria;
 import com.jaime.almacen.exceptions.RecursoNoEncontradoException;
 import com.jaime.almacen.mappers.ProductoMapper;
-import com.jaime.almacen.repositories.ProductoRepository;
+import com.jaime.almacen.repositories.producto.ProductoRepository;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,18 +26,26 @@ public class ProductoServiceImpl implements ProductoService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductoResponse> listar(String nombre, String categoria, BigDecimal precioMin, BigDecimal precioMax) {
-        log.info("Listando todos los productos");
-        return productoRepository.findAll().stream()
-                .filter(p -> nombre == null ||
-                        p.getNombre().toLowerCase()
-                                .contains(nombre.toLowerCase()))
-                .filter(p -> precioMin == null ||
-                        p.getPrecio().compareTo(precioMin) >= 0)
-                .filter(p -> precioMax == null ||
-                        p.getPrecio().compareTo(precioMax) <= 0)
-                .filter(p -> categoria == null ||
-                        p.getCategoria() == Categoria.obtenerCategoriaPorDescripcion(categoria))
+    public List<ProductoResponse> listar(
+            String nombre,
+            String categoria,
+            BigDecimal precioMin,
+            BigDecimal precioMax) {
+
+        log.info("Listando productos con filtros");
+
+        String nombreFiltro = (nombre == null || nombre.isBlank())
+                ? null : nombre.trim();
+
+        Categoria categoriaFiltro = (categoria == null || categoria.isBlank())
+                ? null : Categoria.obtenerCategoriaPorDescripcion(categoria.trim());
+
+        return productoRepository.filtrarProductos(
+                        nombreFiltro,
+                        categoriaFiltro,
+                        precioMin,
+                        precioMax)
+                .stream()
                 .map(productoMapper::entidadAResponse)
                 .toList();
     }
